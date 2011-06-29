@@ -1,0 +1,315 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>jQuery SocialMediaBtns プラグイン</title>
+<link href="css/style.css" rel="stylesheet" type="text/css" media="screen" />
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<script type="text/javascript">google.load("jquery", "1.5");</script>
+<script type="text/javascript" src="js/jquery.SocialMediaBtns.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$('#btns').SocialMediaBtns({
+			mixi_dev_key: 'd8c692d7db9a6654175eed59117852a46da29ca8'
+		});
+		
+		$('#btns2').SocialMediaBtns({
+			mixi_dev_key: 'd8c692d7db9a6654175eed59117852a46da29ca8',
+			btn_set: 'delicious, fb, livedoor, hatena, tw, mixi_check, evernote, yahoo',
+			align:	'right',
+			twitter: { count: 'horizonal' }
+		});
+		
+		$('#btns3').SocialMediaBtns({
+			url: 'http://google.co.jp/',
+			title: 'ググるところです。',
+			btn_set: 'evernote, hatena, fb, tw',
+			evernote: {
+				type: 'type_c',
+				content_id: 'header'
+			},
+			hatena: { layout: 'vertical' },
+			facebook: {
+				layout: 'box_count',
+				width: '72'
+			},
+			twitter: {
+				count: 'vertical',
+				via: 'BUN'
+			}
+		});
+	});
+</script>
+<!--[if lt IE 9]><script type="text/javascript" src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+<body>
+<header id="header">
+	<h1>jQuery SocialMediaBtns プラグイン</h1>
+	<p>ライセンス：MITライセンス<br>
+		ダウンロード：<a href="https://github.com/dreamseeker/jQuerySocialMediaBtns">GitHub</a></p>
+</header>
+<article>
+	<div class="wrap">
+		<section>
+		<p>これは、del.icio.us、Evernote、Facebook いいね！ボタン、はてなブックマーク、livedoor クリップ、mixi チェック、Twitter、Yahoo! ブックマークを表示できるjQueryプラグインのサンプルコンテンツです。</p>
+		<p>jQuery 1.5・IE8 / IE7（Windows 7）・Safari / Firefox 4.0 / Firefox 3.6 / Chrome 10（Mac）で動作確認しています。<br>
+		IE6で不具合があっても、対応する予定はありません。あらかじめご了承ください。</p>
+		</section>
+		<section>
+			<h2>サンプル1</h2>
+			<div id="btns"></div>
+			<pre class="code">
+$('#btns').SocialMediaBtns({
+	mixi_dev_key: 'mixi Developer Centerで取得した識別キー'
+});
+			</pre>
+			<p>mixiチェックを表示する場合は、<a href="http://developer.mixi.co.jp/" target="_blank">mixi Developer Center</a>で識別キーを取得する必要があります。</p>
+		</section>
+		<section>
+			<h2>サンプル2（ボタンの並び替え・右揃え）</h2>
+			<div id="btns2"></div>
+			<pre class="code">
+$('#btns').SocialMediaBtns({
+	mixi_dev_key: 'mixi Developer Centerで取得した識別キー',
+	btn_set: 'delicious, fb, livedoor, hatena, tw, mixi_check, evernote, yahoo',
+	align: 'right',
+	twitter: { count: 'horizonal' }
+});
+			</pre>
+		</section>
+		<section>
+			<h2>サンプル3（縦型ボタンのみ）</h2>
+			<div id="btns3"></div>
+			<pre class="code">
+$('#btns').SocialMediaBtns({
+	url: 'http://google.co.jp/',
+	title: 'ググるところです。',
+	btn_set: 'evernote, hatena, fb, tw',
+	evernote: {
+		type: 'type_c',
+		content_id: 'header'
+	},
+	hatena: { layout: 'vertical' },
+	facebook: {
+		layout: 'box_count',
+		width: '72'
+	},
+	twitter: {
+		count: 'vertical',
+		via: 'BUN'
+	}
+});
+			</pre>
+		</section>
+		<section>
+			<h2>初期化オプションについて（グレーの枠内は初期値です）</h2>
+			<dl>
+				<dt>margin_h:</dt>
+				<dd>アイコン画像のマージン値（単位：ピクセル）を指定します。<br>
+				デフォルトでは右マージンですが、align: 'right'を併記してある場合、左マージンとなります。</dd>
+				<dd class="default">
+					<pre>margin_h: 5</pre>
+				</dd>
+				<dt>margin_v:</dt>
+				<dd>小さいアイコン画像を垂直方向中央に揃えるためのマージン値（単位：ピクセル）を指定します。<br>
+					とは言え、現在は実装していません。</dd>
+				<dd class="default">
+					<pre>margin_v: 2</pre>
+				</dd>
+				<dt>url: </dt>
+				<dd>ツイート本文やブックマーク対象となるURLを指定します。<br>
+				指定がない場合は、表示中のページのlocation.hrefを取得します。<br>
+				<span class="caution">エスケープやURLエンコーディングは、プラグイン側で行います。</span></dd>
+				<dd class="default">
+					<pre>url: null</pre>
+				</dd>
+				<dt>title:</dt>
+				<dd>ツイート本文やブックマーク対象となる文字列を指定します。<br>
+				指定がない場合は、表示中のページのdocument.titleを取得します。<br>
+				<span class="caution">エスケープやURLエンコーディングは、プラグイン側で行います。</span></dd>
+				<dd class="default">
+					<pre>title: null</pre>
+				</dd>
+				<dt>btn_set:</dt>
+				<dd>表示するボタンの種類とソート順を指定します。<br>
+				現時点で対応しているのは、以下8つのサービスです。
+				<ul>
+					<li>del.icio.us（delicious）</li>
+					<li>Evernote（evernote）</li>
+					<li>Facebook いいね！ボタン（fb）</li>
+					<li>はてなブックマーク（hatena）</li>
+					<li>livedoor クリップ（liveboor）</li>
+					<li>mixi チェック（mixi_check）</li>
+					<li>Twitter（tw）</li>
+					<li>Yahoo! ブックマーク（yahoo）</li>
+				</ul>
+				</dd>
+				<dd class="default">
+					<pre>btn_set: 'yahoo, livedoor, delicious, evernote, hatena, mixi_check, tw, fb'</pre>
+				</dd>
+				<dt>align:</dt>
+				<dd>ボタン全体の行揃えを指定します。<br>
+				align: 'right'を指定すると、右揃えにできます。<br>
+				<span class="caution">親要素のスタイル属性にtext-alignプロパティを追加するだけですので、<br>
+				適用されているCSSによって意図した表示にならないかも。。。</span></dd>
+				<dd class="default">
+					<pre>align: 'left'</pre>
+				</dd>
+				<dt>twitter:</dt>
+				<dd>
+					<dl>
+						<dt>count:</dt>
+						<dd>ボタンの形状を指定します。
+						<ul>
+							<li>垂直方向にカウント数を表示（vertical）</li>
+							<li>水平方向にカウント数を表示（horizonal）</li>
+							<li>カウント数の表示なし（none）</li>
+						</ul>
+						</dd>
+						<dt>lang:</dt>
+						<dd>言語を指定します。デフォルトでは、ja（日本語）になっています。</dd>
+						<dt>via: </dt>
+						<dd>投稿画面へおすすめユーザーを表示したい場合に、Twitter アカウント名を指定します。</dd>
+						<dt>text:</dt>
+						<dd>投稿画面の本文を変更する場合は、ここで指定してください</dd>
+					</dl>
+				</dd>
+				<dd>参考URL：<a href="http://twitter.com/goodies/tweetbutton" target="_blank">http://twitter.com/goodies/tweetbutton</a></dd>
+				<dd class="default">
+					<pre>twitter: {
+	count: 'none',
+	lang: 'ja',
+	via: null,
+	text: null
+}</pre>
+				</dd>
+				<dt>facebook:</dt>
+				<dd>
+					<dl>
+						<dt>layout:</dt>
+						<dd>レイアウトスタイルを指定します。
+						<ul>
+							<li>標準（standard）</li>
+							<li>ボタンおよびカウント数（button_count）</li>
+							<li>ボタンおよびカウント数（垂直方向）（box_count）</li>
+						</ul>
+						</dd>
+						<dt>show_face:</dt>
+						<dd>アイコン画像の表示をブーリアン（ true | false ）で指定します。</dd>
+						<dt>colorscheme:</dt>
+						<dd>ボタンのカラースキーマを light | dark のいずれかで指定します。</dd>
+						<dt>width:</dt>
+						<dd>iframe要素の幅を数値（単位：ピクセル）指定します。</dd>
+						<dt>height:</dt>
+						<dd>iframe要素の高さを数値（単位：ピクセル）指定します。</dd>
+					</dl>
+				</dd>
+				<dd>参考URL：<a href="http://developers.facebook.com/docs/reference/plugins/like/" target="_blank">http://developers.facebook.com/docs/reference/plugins/like/</a></dd>
+				<dd class="default">
+					<pre>facebook: {
+	layout: 'button_count',
+	show_face: true,
+	colorscheme: 'light',
+	width: 120,
+	height: 21
+}</pre>
+				</dd>
+				<dt>hatena:</dt>
+				<dd>
+					<dl>
+						<dt>layout:</dt>
+						<dd>ボタンのタイプを指定します。
+						<ul>
+							<li>スタンダード（standard）</li>
+							<li>バーティカル（vertical）</li>
+							<li>シンプル（simple）</li>
+						</ul></dd>
+					</dl>
+				</dd>
+				<dd>参考URL：<a href="http://b.hatena.ne.jp/guide/bbutton" target="_blank">http://b.hatena.ne.jp/guide/bbutton</a></dd>
+				<dd class="default">
+					<pre>hatena: {
+	layout: 'simple'
+}</pre>
+				</dd>
+				<dt>yahoo:</dt>
+				<dd>
+					<dl>
+						<dt>type:</dt>
+						<dd>ボタンのタイプを type_a 〜 type_d のいずれかで指定します。</dd>
+					</dl>
+				</dd>
+				<dd>参考URL：<a href="http://bookmarks.yahoo.co.jp/settings/tools/savelink" target="_blank">http://bookmarks.yahoo.co.jp/settings/tools/savelink</a></dd>
+				<dd class="default">
+					<pre>yahoo: {
+	type: 'type_d'
+}</pre>
+				</dd>
+				<dt>livedoor:</dt>
+				<dd>
+					<dl>
+						<dt>type:</dt>
+						<dd>アイコン画像のタイプを type_a 〜 type_d のいずれかで指定します。</dd>
+					</dl>
+				</dd>
+				<dd>参考URL：<a href="http://clip.livedoor.com/guide/blog.html" target="_blank">http://clip.livedoor.com/guide/blog.html</a></dd>
+				<dd class="default">
+					<pre>livedoor: {
+	type: 'type_a'
+}</pre>
+				</dd>
+				<dt>evernote:</dt>
+				<dd>
+					<dl>
+						<dt>type:</dt>
+						<dd>アイコン画像のタイプを type_a 〜 type_g のいずれかで指定します。</dd>
+						<dt>content_id:</dt>
+						<dd>必要にあわせて、Evernoteにクリップしたいコンテンツを含む親要素のid名を指定します。</dd>
+					</dl>
+				</dd>
+				<dd>参考URL：<a href="http://www.evernote.com/about/developer/sitememory/#a_builder" target="_blank">http://www.evernote.com/about/developer/sitememory/#a_builder</a></dd>
+				<dd class="default">
+					<pre>evernote: {
+	type: 'type_g',
+	content_id: null
+}</pre>
+				</dd>
+				<dt>mixi_dev_key:</dt>
+				<dd>mixi チェックキーを指定します。<br>
+					あらかじめ、<a href="http://developer.mixi.co.jp/" target="_blank">mixi Developer Center</a>のmixi Pluginでサービス登録を行ない、識別キーを取得してください。</dd>
+				<dd class="default">
+					<pre>mixi_dev_key: null</pre>
+				</dd>
+				<dt>mixi_check:</dt>
+				<dd>
+					<dl>
+						<dt>type:</dt>
+						<dd>mixiチェックのアイコン画像を buttun-1 〜 button-5 で指定します。<br>
+							選択可能な画像タイプは、mixi Developer Centerの<a href="http://developer.mixi.co.jp/connect/mixi_plugin/mixi_check/spec_mixi_check" target="_blank">mixiチェック 技術仕様</a>を確認してください。</dd>
+					</dl>
+				</dd>
+				<dd class="default">
+					<pre>mixi_check: { type: 'button-1' }</pre>
+				</dd>
+			</dl>
+		</section>
+		<section>
+			<h2>謝辞</h2>
+			<p>このプラグインを作るにあたって、下記サイトを参考にさせていただきました。<br>
+			ありがとうございます。</p>
+			<ul>
+				<li><strong>Social Media Buttons</strong><br>
+				<a href="http://cielquis.net/smb/" target="_blank">http://cielquis.net/smb/</a></li>
+				<li><strong>ソーシャルメディアに共有するボタンの設置方法（Twitter、facebook、mixi、GREE、Evernote） [C!]</strong><br>
+				<a href="http://creazy.net/2010/09/howto_setup_social_media_button.html" target="_blank">http://creazy.net/2010/09/howto_setup_social_media_button.html</a></li>
+			</ul>
+		</section>
+		<section>
+		<h2>備考</h2>
+		<p>お気づきの点やご意見・ご要望などありましたら、<a href="http://twitter.com/BUN" target="_blank">@BUN</a>または<a href="http://d-s-b.jp/" target="_blank">dreamseeker</a>まで、ご連絡ください。 </p>
+		</section>
+	</div>
+</article>
+<footer></footer>
+</body>
+</html>
