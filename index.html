@@ -46,14 +46,26 @@
 <header id="header">
 	<h1>jQuery SocialMediaBtns プラグイン</h1>
 	<p>ライセンス：MITライセンス<br>
-		ダウンロード：<a href="https://github.com/dreamseeker/jQuerySocialMediaBtns">GitHub</a></p>
+	ダウンロード：<a href="https://github.com/dreamseeker/jQuerySocialMediaBtns">GitHub</a><br>
+	バージョン：1.01
+	</p>
 </header>
 <article>
 	<div class="wrap">
 		<section>
-		<p>これは、del.icio.us、Evernote、Facebook いいね！ボタン、はてなブックマーク、livedoor クリップ、mixi チェック、Twitter、Yahoo! ブックマークを表示できるjQueryプラグインのサンプルコンテンツです。</p>
+		<p>これは、del.icio.us、Evernote、Facebook いいね！ボタン、Google +1ボタン、はてなブックマーク、livedoor クリップ、mixi チェック、Twitter、Yahoo! ブックマークを表示できるjQueryプラグインのサンプルコンテンツです。</p>
 		<p>jQuery 1.5・IE8 / IE7（Windows 7）・Safari / Firefox 4.0 / Firefox 3.6 / Chrome 10（Mac）で動作確認しています。<br>
 		IE6で不具合があっても、対応する予定はありません。あらかじめご了承ください。</p>
+		</section>
+		<section>
+			<h2>更新履歴</h2>
+			<dl>
+				<dt>2011.06.30</dt>
+				<dd>jQuery SocialMediaBtns プラグイン ver 1.01を公開。<br>
+				Google +1に対応しました。</dd>
+				<dt>2011.04.22</dt>
+				<dd>jQuery SocialMediaBtns プラグイン ver 1.00を公開。</dd>
+			</dl>
 		</section>
 		<section>
 			<h2>サンプル1</h2>
@@ -132,11 +144,12 @@ $('#btns').SocialMediaBtns({
 				</dd>
 				<dt>btn_set:</dt>
 				<dd>表示するボタンの種類とソート順を指定します。<br>
-				現時点で対応しているのは、以下8つのサービスです。
+				現時点で対応しているのは、以下9つのサービスです。
 				<ul>
 					<li>del.icio.us（delicious）</li>
 					<li>Evernote（evernote）</li>
 					<li>Facebook いいね！ボタン（fb）</li>
+					<li>Google +1 ボタン（gp1）</li>
 					<li>はてなブックマーク（hatena）</li>
 					<li>livedoor クリップ（liveboor）</li>
 					<li>mixi チェック（mixi_check）</li>
@@ -145,7 +158,7 @@ $('#btns').SocialMediaBtns({
 				</ul>
 				</dd>
 				<dd class="default">
-					<pre>btn_set: 'yahoo, livedoor, delicious, evernote, hatena, mixi_check, tw, fb'</pre>
+					<pre>btn_set: 'yahoo, livedoor, delicious, evernote, hatena, mixi_check, tw, fb, gp1'</pre>
 				</dd>
 				<dt>align:</dt>
 				<dd>ボタン全体の行揃えを指定します。<br>
@@ -290,6 +303,38 @@ $('#btns').SocialMediaBtns({
 				</dd>
 				<dd class="default">
 					<pre>mixi_check: { type: 'button-1' }</pre>
+				</dd>
+				<dt>google_plus1:</dt>
+				<dd>
+					<dl>
+						<dt>lang:</dt>
+						<dd>言語を指定します。デフォルトでは、ja（日本語）になっています。</dd>
+						<dt>parsettags:</dt>
+						<dd>ボタン表示のタイミングを（ onload | explicit ）で指定します。デフォルトでは、 onload になっています。</dd>
+						<dt>callback:</dt>
+						<dd>クリック後に呼び出されるコールバック関数を指定します。</dd>
+						<dt>count:</dt>
+						<dd>カウンターの表示をブーリアン（ true | false ）で指定します。</dd>
+						<dt>size:</dt>
+						<dd>アイコン画像のサイズを指定します。
+						<ul>
+							<li>小（small）</li>
+							<li>中（medium）</li>
+							<li>標準（standard）</li>
+							<li>大（tall）</li>
+						</ul></dd>
+					</dl>
+				</dd>
+				<dd>参考URL：<a href="http://code.google.com/intl/ja/apis/+1button/" target="_blank">http://code.google.com/intl/ja/apis/+1button/</a></dd>
+				<dd class="default">
+					<pre>google_plus1: {
+	lang: 'ja',
+	parsetags: null,
+	callback: null,
+	count: true,
+	href: null,
+	size: 'medium'
+}</pre>
 				</dd>
 			</dl>
 		</section>
