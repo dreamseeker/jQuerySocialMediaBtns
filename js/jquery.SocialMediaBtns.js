@@ -26,50 +26,50 @@
 			-------------------------------------------------------------------------- */
 			var $self			= this;
 			
-			var margin_h			= opts.margin_h	;
-			var margin_v			= opts.margin_v	;
+			var margin_h		= opts.margin_h	;
+			var margin_v		= opts.margin_v	;
 			
 			var align			= opts.align;
-			var btn_align		= ( align == 'left')		? 'padding-right'	: 'padding-left';
+			var btn_align		= ( align == 'left')		? 'padding-right'		: 'padding-left';
 			var span_style		= btn_align + ': ' + margin_h + 'px;';
 			
-			var url				= ( opts.url )			? opts.url			: location.href;
+			var url				= ( opts.url )				? opts.url				: location.href;
 			var title			= ( opts.title )			? opts.title			: document.title;
 			
 			// Twitter Properties
 			var tw				= opts.twitter;
-			var tw_count			= ( tw['count'] )		? tw['count']		: 'none';
+			var tw_count		= ( tw['count'] )			? tw['count']			: 'none';
 			var tw_lang			= ( tw['lang'] )			? tw['lang']			: 'ja';
-			var tw_via			= ( tw['via'] )			? tw['via']			: '';
+			var tw_via			= ( tw['via'] )				? tw['via']				: '';
 			var tw_url			= url;
 			var tw_text			= ( tw['text'] )			? tw['text']			: title;
 			
 			// Facebook Properties
 			var fb				= opts.facebook;
 			var fb_url			= '';
-			var fb_layout		= ( fb['layout'] )		? fb['layout']		: 'button_count';
-			var fb_show_face		= ( fb['show_face'] )	? fb['show_face']	: true;
-			var fb_colorscheme	= ( fb['colorscheme'] )	? fb['colorscheme']	: 'light';
-			var fb_width			= ( fb['width'] )		? fb['width']		: '';
-			var fb_height		= ( fb['height'] )		? fb['height']		: '';
-			var fb_sizes			= defs.facebook.sizes;
+			var fb_layout		= ( fb['layout'] )			? fb['layout']			: 'button_count';
+			var fb_show_face	= ( fb['show_face'] )		? fb['show_face']		: true;
+			var fb_colorscheme	= ( fb['colorscheme'] )		? fb['colorscheme']		: 'light';
+			var fb_width		= ( fb['width'] )			? fb['width']			: '';
+			var fb_height		= ( fb['height'] )			? fb['height']			: '';
+			var fb_sizes		= defs.facebook.sizes;
 			
 			// Hatena Bookmark Properties
 			var hatena			= opts.hatena;
 			var hatena_url		= '';
-			var hatena_layout	= ( hatena['layout'] )	? hatena['layout']	: 'standard';
-			var hatena_title		= title;
+			var hatena_layout	= ( hatena['layout'] )		? hatena['layout']		: 'standard';
+			var hatena_title	= title;
 			
 			// Yahoo! Bookmark Properties
 			var yahoo			= defs.yahoo;
-			var yahoo_type		= ( opts.yahoo.type )	? opts.yahoo.type	: 'type_a';
+			var yahoo_type		= ( opts.yahoo.type )		? opts.yahoo.type		: 'type_a';
 			var yahoo_url		= '';
 			var yahoo_title		= '';
 			
 			// livedoor Clip Properties
-			var livedoor			= defs.livedoor;
+			var livedoor		= defs.livedoor;
 			var livedoor_type	= ( opts.livedoor.type )	? opts.livedoor.type	: 'type_a';
-			var livedoor_url		= url;
+			var livedoor_url	= url;
 			var livedoor_title	= '';
 			
 			// del.icio.us Properties
@@ -77,18 +77,27 @@
 			var delicious_title	= '';
 			
 			// Evernote Properties
-			var evernote				= defs.evernote;
-			var evernote_type		= ( opts.evernote.type )			? opts.evernote.type								: 'type_g';
+			var evernote			= defs.evernote;
+			var evernote_type		= ( opts.evernote.type )		? opts.evernote.type								: 'type_g';
 			var evernote_content_id	= ( opts.evernote.content_id )	? "contentId:'" + opts.evernote.content_id + "'"	: '';
 			
 			// mixi Check Properties
-			var mixi_dev_key		= ( opts.mixi_dev_key )		? opts.mixi_dev_key		: '';
-			var mixi_check_type	= ( !opts.mixi_check.type )	? opts.mixi_check.type	: 'button-1';
+			var mixi_dev_key	= ( opts.mixi_dev_key )		? opts.mixi_dev_key		: '';
+			var mixi_check_type	= ( opts.mixi_check.type )	? opts.mixi_check.type	: 'button-1';
+			
+			// Google +1 Properties
+			var gp1				= opts.google_plus1;
+			var gp1_lang		= ( gp1['lang'] )		? gp1['lang']		: 'ja';
+			var gp1_parsetags	= ( gp1['parsetags'] )	? gp1['parsetags']	: 'onload';
+			var gp1_callback	= ( gp1['callback'] )	? gp1['callback']	: '';
+			var gp1_count		= ( gp1['count'] )		? gp1['count']		: true;
+			var gp1_href		= url;
+			var gp1_size		= ( gp1['size'] )		? gp1['size']		: 'standard';
 			
 			fb_url =	 yahoo_url = delicious_url	= encodeURIComponent( url );
-			hatena_url							= escape( url );
-			yahoo_title = delicious_title		= encodeURIComponent( title );
-			livedoor_title						= escape( title );
+			hatena_url								= escape( url );
+			yahoo_title = delicious_title			= encodeURIComponent( title );
+			livedoor_title							= escape( title );
 			
 			/* -------------------------------------------------------------------------
 		
@@ -138,6 +147,9 @@
 								if( mixi_dev_key ){
 									createBtnMixiCheck( mixi_dev_key, mixi_check_type );
 								}
+								break;
+							case 'gp1':
+								createBtnGooglePlusOne( gp1_lang, gp1_parsetags, gp1_callback, gp1_count, gp1_href, gp1_size );
 								break;
 						}
 					}
@@ -214,11 +226,11 @@
 						
 					var obj_img = $('span.btn-hatena > a > img', $self);
 						obj_img.attr({
-							src:			'http://b.st-hatena.com/images/entry-button/button-only.gif',
-							alt:			'はてなブックマークに追加',
-							width:		20,
-							height:		20,
-							style:		'border:none;'
+							src:	'http://b.st-hatena.com/images/entry-button/button-only.gif',
+							alt:	'はてなブックマークに追加',
+							width:	20,
+							height:	20,
+							style:	'border:none;'
 						});
 						
 						obj_span.append( script );
@@ -246,11 +258,11 @@
 						
 					var obj_img = $('span.btn-yahoo > a > img', $self);
 						obj_img.attr({
-							src:			'http://i.yimg.jp/images/' + yahoo[ icon_type ].src,
-							alt:			'Yahoo!ブックマークに登録',
-							width:		yahoo[ icon_type ].img_w,
-							height:		yahoo[ icon_type ].img_h,
-							style:		'border:none;'
+							src:	'http://i.yimg.jp/images/' + yahoo[ icon_type ].src,
+							alt:	'Yahoo!ブックマークに登録',
+							width:	yahoo[ icon_type ].img_w,
+							height:	yahoo[ icon_type ].img_h,
+							style:	'border:none;'
 						});
 				};
 				
@@ -271,11 +283,11 @@
 						
 					var obj_img = $('span.btn-livedoor > a > img', $self);
 						obj_img.attr({
-							src:			'http://parts.blog.livedoor.jp/img/cmn/' + livedoor[ type ].src,
-							width:		livedoor[ type ].img_w,
-							height:		livedoor[ type ].img_h,
-							alt:			'この記事をクリップ！',
-							style:		'border: none;'
+							src:	'http://parts.blog.livedoor.jp/img/cmn/' + livedoor[ type ].src,
+							width:	livedoor[ type ].img_w,
+							height:	livedoor[ type ].img_h,
+							alt:	'この記事をクリップ！',
+							style:	'border: none;'
 						});
 				};
 				
@@ -298,11 +310,11 @@
 						
 					var obj_img = $('span.btn-delicious > a > img', $self);
 						obj_img.attr({
-							src:			'http://l.yimg.com/hr/img/delicious.gif',
-							width:		16,
-							height:		16,
-							alt:			'del.icio.usに追加',
-							style:		'border: none;'
+							src:	'http://l.yimg.com/hr/img/delicious.gif',
+							width:	16,
+							height:	16,
+							alt:	'del.icio.usに追加',
+							style:	'border: none;'
 						});
 				};
 				
@@ -324,11 +336,12 @@
 						
 					var obj_img = $('span.btn-evernote > a > img', $self);
 						obj_img.attr({
-							src:			'http://static.evernote.com/' + evernote[ type ].src,
-							alt:			'Evernoteにクリップ',
-							style:		'border: none;'
+							src:	'http://static.evernote.com/' + evernote[ type ].src,
+							alt:	'Evernoteにクリップ',
+							style:	'border: none;'
 						});
 				};
+				
 				// Create mixi Check Btn
 				function createBtnMixiCheck( dev_key, type ){
 					var tpl = '';
@@ -342,6 +355,29 @@
 						$($self).append('<span class="btn-mixi-check" />');
 						
 					var obj_span = $('span.btn-mixi-check', $self)
+						obj_span.attr({ style: span_style })
+								.append( tpl );
+				}
+				
+				// Create Google +1 Btn
+				function createBtnGooglePlusOne( lang, parsetags, callback, count, href, size ){
+					var tpl = '';
+						tpl += '<script type="text/javascript" src="https://apis.google.com/js/plusone.js">';
+						tpl += "{lang:'" + lang + "'" +  + "}";
+						tpl += '</script>';
+						tpl += '<g:plusone';
+						tpl += ' size="' + size + '"';
+						tpl += ' count="' + count + '"';
+						tpl += ' callback="' + callback + '"';
+						tpl += ' href="' + href + '"';
+						tpl += ' ></g:plusone>';
+						if(parsetags == 'explicit') {
+							tpl += '<script type="text/javascript">gapi.plusone.go();</script>';
+						}
+						
+						$($self).append('<span class="btn-google-plus1" />');
+						
+					var obj_span = $('span.btn-google-plus1', $self)
 						obj_span.attr({ style: span_style })
 								.append( tpl );
 				}
@@ -360,23 +396,23 @@
 		margin_h:			5,
 		margin_v:			2,
 		
-		url:					null,
+		url:				null,
 		title:				null,
 		
-		btn_set:				'yahoo, livedoor, delicious, evernote, hatena, mixi_check, tw, fb',
+		btn_set:			'yahoo, livedoor, delicious, evernote, hatena, mixi_check, tw, fb, gp1',
 		align:				'left',
 		
 		twitter: {
 			count:			'none',
 			lang:			'ja',
-			via:				null,
+			via:			null,
 			text:			null
 		},
 		
 		facebook: {
 			layout:			'button_count',
 			show_face:		true,
-			colorscheme:		'light',
+			colorscheme:	'light',
 			width:			120,
 			height:			21
 		},
@@ -402,6 +438,15 @@
 		
 		mixi_check: {
 			type:			'button-1'
+		},
+		
+		google_plus1: {
+			lang:			'ja',
+			parsetags:		null,
+			callback:		null,
+			count:			true,
+			href:			null,
+			size:			'medium'
 		}
 	};
 	
@@ -425,12 +470,12 @@
 		
 		yahoo: {
 			icon_l: {
-				src:			'ybm/blogparts/addmy_btn.gif',
+				src:		'ybm/blogparts/addmy_btn.gif',
 				img_w:		125,
 				img_h:		17
 			},
 			icon_s: {
-				src:			'sicons/ybm16.gif',
+				src:		'sicons/ybm16.gif',
 				img_w:		16,
 				img_h:		16
 			}
@@ -438,22 +483,22 @@
 		
 		livedoor: {
 			type_a: {
-				src:			'clip_16_16_w.gif',
+				src:		'clip_16_16_w.gif',
 				img_w:		16,
 				img_h:		16
 			},
 			type_b: {
-				src:			'clip_16_16_b.gif',
+				src:		'clip_16_16_b.gif',
 				img_w:		16,
 				img_h:		16
 			},
 			type_c: {
-				src:			'clip_16_12_w.gif',
+				src:		'clip_16_12_w.gif',
 				img_w:		16,
 				img_h:		12
 			},
 			type_d: {
-				src:			'clip_16_12_b.gif',
+				src:		'clip_16_12_b.gif',
 				img_w:		16,
 				img_h:		12
 			}
