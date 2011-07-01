@@ -6,8 +6,8 @@
  * http://www.opensource.org/licenses/mit-license.php
  * http://sourceforge.jp/projects/opensource/wiki/licenses%2FMIT_license
  *
- * Last Modified: 2011-06-30
- * version: 1.01 
+ * Last Modified: 2011-07-01
+ * version: 1.02
  *
  * This program checked the oparation on jQuery 1.5.2.
  * 
@@ -90,7 +90,7 @@
 			var gp1_lang		= ( gp1['lang'] )		? gp1['lang']		: 'ja';
 			var gp1_parsetags	= ( gp1['parsetags'] )	? gp1['parsetags']	: 'onload';
 			var gp1_callback	= ( gp1['callback'] )	? gp1['callback']	: '';
-			var gp1_count		= ( gp1['count'] )		? gp1['count']		: true;
+			var gp1_count		= ( gp1['count'] )		? gp1['count']		: 'true';
 			var gp1_href		= url;
 			var gp1_size		= ( gp1['size'] )		? gp1['size']		: 'standard';
 			
@@ -444,7 +444,7 @@
 			lang:			'ja',
 			parsetags:		null,
 			callback:		null,
-			count:			true,
+			count:			'true',
 			href:			null,
 			size:			'medium'
 		}
