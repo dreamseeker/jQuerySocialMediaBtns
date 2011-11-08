@@ -6,8 +6,8 @@
  * http://www.opensource.org/licenses/mit-license.php
  * http://sourceforge.jp/projects/opensource/wiki/licenses%2FMIT_license
  *
- * Last Modified: 2011-07-01
- * version: 1.02
+ * Last Modified: 2011-11-08
+ * version: 1.03
  *
  * This program checked the oparation on jQuery 1.5.2.
  * 
@@ -75,6 +75,8 @@
 			// del.icio.us Properties
 			var delicious_url	= '';
 			var delicious_title	= '';
+			var delicious_img_w	= opts.delicious.img_w;
+			var delicious_img_h	= opts.delicious.img_h;
 			
 			// Evernote Properties
 			var evernote			= defs.evernote;
@@ -138,7 +140,7 @@
 								createBtnLivedoor( livedoor_type, livedoor_url, livedoor_title );
 								break;
 							case 'delicious':
-								createBtnDelicious( delicious_url, delicious_title );
+								createBtnDelicious( delicious_url, delicious_title, delicious_img_w, delicious_img_h );
 								break;
 							case 'evernote':
 								createBtnEvernote( evernote_type, evernote_content_id );
@@ -292,7 +294,7 @@
 				};
 				
 				// Create Delicious Btn
-				function createBtnDelicious( url, title ){
+				function createBtnDelicious( url, title, img_w, img_h ){
 					var tpl = '';
 						tpl += '<a href="http://www.delicious.com/save"';
 						tpl += ' onclick="window.open('
@@ -310,9 +312,9 @@
 						
 					var obj_img = $('span.btn-delicious > a > img', $self);
 						obj_img.attr({
-							src:	'http://l.yimg.com/hr/img/delicious.gif',
-							width:	16,
-							height:	16,
+							src:	'http://www.delicious.com/static/img/delicious.small.gif',
+							width:	img_w,
+							height:	img_h,
 							alt:	'del.icio.usに追加',
 							style:	'border: none;'
 						});
@@ -427,6 +429,11 @@
 		
 		livedoor: {
 			type:			'type_a'
+		},
+		
+		delicious: {
+			img_w:			16,
+			img_h:			16
 		},
 		
 		evernote: {
